@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>origincar_base</name>
+  <version>0.0.0</version>
+  <description>ROS2 origincar_base for origincar_base</description>
+  <maintainer email="ps-micro@todo.todo">ps-micro</maintainer>
+  <license>TODO: License declaration</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <test_depend>ament_lint_auto</test_depend>
+  <test_depend>ament_lint_common</test_depend>
+  <build_export_depend>tf2_geometry_msgs</build_export_depend>
+
+
+  <buildtool_depend>rosidl_default_generators</buildtool_depend>
+  <member_of_group>rosidl_interface_packages</member_of_group>
+  <build_depend>tf2_geometry_msgs</build_depend>
+
+  <exec_depend>rosidl_default_runtime</exec_depend>
+  <depend>ament_index_cpp</depend>
+  <depend>geometry_msgs</depend>
+  <depend>rclcpp</depend>
+  <depend>rclcpp_action</depend>
+  <depend>sensor_msgs</depend>
+  <depend>std_msgs</depend>
+  <depend>std_srvs</depend>
+  <depend>tf2</depend>
+  <depend>tf2_ros</depend>
+  <depend>rclpy</depend>
+  <depend>serial</depend>
+  <depend>nav2_msgs</depend>
+  <depend>nav_msgs</depend>
+  <depend>ackermann_msgs</depend>
+  <depend>origincar_msg</depend>
+  <depend>origincar_description</depend>
+  <depend>robot_localization</depend>
+  
+  <test_depend>boost</test_depend>
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

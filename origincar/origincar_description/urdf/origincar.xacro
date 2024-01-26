@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<robot name="mycar" xmlns:xacro="http://wiki.ros.org/xacro">
+
+  <xacro:property name="PI" value="3.1415926"/>
+  <xacro:property name="Track" value="0.1682"/>
+  <xacro:property name="WheelBase" value="0.189"/>
+  <xacro:property name="WheelLen" value="0.025"/>
+
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <box size="0.276 ${WheelBase-WheelLen} 0.08"/>
+      </geometry>
+      <origin xyz="0 0 ${0.08/2+0.03}" rpy="0 0 0"/>
+      <material name="rgba(102,10,10,1)">
+        <color rgba="${102/255} ${10/255} ${10/255} 1" />
+      </material>
+    </visual>
+  </link>
+
+  <link name="board_link">
+    <visual>
+      <geometry>
+        <box size="0.200 ${WheelBase-WheelLen} ${0.150-0.08}"/>
+      </geometry>
+      <origin xyz="0 0 ${(0.150-0.08)/2}" rpy="0 0 0"/>
+      <material name="rgba(246,152,152,1)">
+        <color rgba="${246/255} ${152/255} ${152/255} 1" />
+      </material>
+    </visual>
+  </link>
+
+  <link name="camera" >
+    <visual>
+      <geometry>
+        <box size="0.015 0.045 0.03"/>
+      </geometry>
+      <origin xyz="0 0 ${(0.03)/2}" rpy="0 0 0"/>
+      <material name="rgba(93,78,78,1)">
+        <color rgba="${93/255} ${78/255} ${78/255} 1" />
+      </material>
+    </visual>
+  </link>
+
+  <joint name="camera_joint" type="fixed">
+    <parent link="base_link" />
+    <child link="camera" />
+    <origin xyz="${(0.276-0.015)/2-0.01} 0 ${0.08+0.03}" rpy="0 0 0" /> 
+  </joint>
+  
+
+  <joint name="board_joint" type="fixed">
+    <parent link="base_link" />
+    <child link="board_link" />
+    <origin xyz="${-(0.276-0.2)/2} 0 ${0.08+0.03}" rpy="0 0 0" /> 
+    <axis xyz="0 1 0" />
+  </joint>
+
+  <link name="down_left_Link">
+    <visual>
+      <origin xyz="0 ${-WheelLen/2+0.025/2} 0" rpy="${-PI/2} 0 0" />
+      <geometry>
+        <cylinder radius="0.03" length="0.025" />
+      </geometry>
+      <material name="">
+        <color rgba="0.7450980392156863 0.12941176470588237 0.12941176470588237 1" />
+      </material>
+    </visual>
+  </link>
+
+  <joint name="down_left_joint" type="continuous">
+    <parent link="base_link" />
+    <child link="down_left_Link" />
+    <origin xyz="${-Track/2} ${WheelBase/2} ${0.03}" rpy="0 0 0" /> 
+    <axis xyz="0 1 0" />
+  </joint>
+
+  <link name="down_right_Link">
+    <visual>
+      <origin xyz="0 ${WheelLen/2-0.025/2} 0" rpy="${PI/2} 0 0" />
+      <geometry>
+        <cylinder radius="0.03" length="0.025"/>
+      </geometry>
+      <material name="">
+        <color rgba="0.7450980392156863 0.12941176470588237 0.12941176470588237 1" />
+      </material>
+    </visual>
+  </link>
+
+  <joint name="down_right_joint" type="continuous">
+    <parent link="base_link" />
+    <child link="down_right_Link" />
+    <origin xyz="${-Track/2} ${-WheelBase/2} ${0.03}" rpy="0 0 0" /> 
+    <axis xyz="0 -1 0" />
+  </joint>
+
+  <link name="up_left_Link">
+    <visual>
+      <origin xyz="0 ${-WheelLen/2+0.025/2} 0" rpy="${-PI/2} 0 0" />
+      <geometry>
+        <cylinder radius="0.03" length="0.025"/>
+      </geometry>
+      <material name="">
+        <color rgba="0.7450980392156863 0.12941176470588237 0.12941176470588237 1" />
+      </material>
+    </visual>
+  </link>
+
+  <joint name="up_left_joint" type="continuous">
+    <parent link="base_link" />
+    <child  link="up_left_Link" />
+    <origin xyz="${Track/2} ${WheelBase/2} ${0.03}" rpy="0 0 0" /> 
+    <axis xyz="0 1 0" />
+  </joint>
+
+  <link name="up_right_Link">
+    <visual>
+      <origin xyz="0 ${WheelLen/2-0.025/2} 0" rpy="${PI/2} 0 0" />
+      <geometry>
+        <cylinder radius="0.03" length="0.025"/>
+      </geometry>
+      <material name="">
+        <color rgba="0.7450980392156863 0.12941176470588237 0.12941176470588237 1" />
+      </material>
+    </visual>
+  </link>
+
+  <joint name="up_right_joint" type="continuous">
+    <parent link="base_link" />
+    <child link="up_right_Link" />
+    <origin xyz="${Track/2} ${-WheelBase/2} ${0.03}" rpy="0 0 0" /> 
+    <axis  xyz="0 -1 0" />
+  </joint>
+</robot>
