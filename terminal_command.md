@@ -22,6 +22,13 @@ ros2 launch origincar_base origincar_bringup.launch.py
 ros2 run teleop_twist_keyboard teleop_twist_keyboard
 ```
 
+## 编译
+
+```
+cd ~/dev_ws/src
+colcon build
+```
+
 ## 编译完刷新
 
 ```Shell
