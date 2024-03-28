@@ -25,7 +25,7 @@ ros2 run teleop_twist_keyboard teleop_twist_keyboard
 ## 编译
 
 ```
-cd ~/dev_ws/src
+cd ~/dev_ws
 colcon build
 ```
 
