@@ -28,7 +28,7 @@ ros2 run teleop_twist_keyboard teleop_twist_keyboard
 cd ~/dev_ws
 colcon build `编译所有功能包`
 colcon build --packages-up-to <name-of-pkg> `编译<name-of-pkg>功能包及其依赖`
-colcon build --symlink-install == 允许更改src中的python脚本后不再重新编译==
+colcon build --symlink-install `允许更改src中的python脚本后不再重新编译`
 ```
 
 ## 编译完刷新
