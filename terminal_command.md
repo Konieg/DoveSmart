@@ -26,7 +26,9 @@ ros2 run teleop_twist_keyboard teleop_twist_keyboard
 
 ```
 cd ~/dev_ws
-colcon build
+colcon build `编译所有功能包`
+colcon build --packages-up-to <name-of-pkg> `编译<name-of-pkg>功能包及其依赖`
+
 ```
 
 ## 编译完刷新
