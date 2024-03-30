@@ -56,3 +56,7 @@ ros2 run origincar_capimage capimage
 ros2 topic echo <topic_name>
 ros2 topic hz /image_raw
 ```
+
+## capimage进行图片
+ros2 run origincar_capimage2 capimage2 <--image_dir> <--resolution 960x540> <--frequency 2>
+##
