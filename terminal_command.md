@@ -61,7 +61,12 @@ ros2 topic hz /image_raw
 ```
 
 ## capimage进行图片拍摄
-```
+```Shell
 ros2 run origincar_capimage2 capimage2 <--image_dir> <--resolution 960x540> <--frequency 2>
 ```
 ##
+
+## 深度学习节点
+```Shell
+ros2 launch origincar_bringup usb_websocket_display.launch.py
+```
