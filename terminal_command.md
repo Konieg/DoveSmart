@@ -43,6 +43,7 @@ echo "source /root/dev_ws/install/local_setup.bash" >> ~/.bashrc
 ```Shell
 ros2 run v4l2_camera v4l2_camera_node --ros-args -p video_device:="/dev/video8" -p image_size:=[640,480]
 或者
+ros2 launch hobot_usb_cam hobot_usb_cam.launch.py usb_video_device:=/dev/video8
 ros2 run origincar_demo relay_img
 ```
 
