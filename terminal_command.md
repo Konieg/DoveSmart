@@ -67,8 +67,8 @@ ros2 run origincar_capimage2 capimage2 <--image_dir> <--resolution 960x540> <--f
 ```
 ##
 
-## 深度学习节点
+## 深度学习巡线
 ```Shell
-ros2 launch origincar_bringup usb_websocket_display.launch.py
+ros2 launch origincar_bringup camera.launch.py
 ros2 run line_follower_perception line_follower_perception --ros-args -p model_path:=model/resnet18_224x224_nv12.bin -p model_name:=resnet18_224x224_nv12
 ```
