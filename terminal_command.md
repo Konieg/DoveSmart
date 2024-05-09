@@ -21,7 +21,7 @@ ros2 run line_follower_resnet line_follower_resnet --ros-args -p model_path:=mod
 
 ```Shell
 订阅的是/image_raw/compressed
-ros2 launch qr_code_detection.launch.py
+ros2 launch qr_code_detection qr_code_detection.launch.py
 ```
 
 ## 零拷贝
