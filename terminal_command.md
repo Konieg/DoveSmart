@@ -1,16 +1,36 @@
 # DoveSmart TJU
+## origincar_move_yolo
+```shell
+ros2 launch origincar_base origincar_bringup.launch.py
+ros2 launch origincar_bringup camera.launch.py enable_nv12_node:=true
+ros2 run origincar_move_yolo origincar_move_yolo
+```
+
+## Web可视化yolo识别结果
+```shell
+Plan A:输入指令前，务必关闭摄像头、origincar_move_yolo和play_football
+ros2 launch origincar_bringup usb_websocket_display.launch.py
+浏览器输入网址:192.168.1.10:8000(有线连接)或192.168.31.143:8000(无线连接)
+```
+
+## 启动底盘手动控制小车移动
+```shell
+ros2 launch origincar_base origincar_bringup.launch.py
+ros2 launch rosbridge_server rosbridge_websocket_launch.xml
+打开bridge.exe，注意同目录下.yaml文件中的IP地址需要对应，有线为192.168.1.10
+点击r开启键盘监听，点击p关闭键盘监听
+上下左右箭头调整车速，WASD进行移动
+```
 
 ## OpenCV巡线
 
 ```Shell
 ros2 launch origincar_base origincar_bringup.launch.py
-ros2 launch rosbridge_server rosbridge_websocket_launch.xml
 ros2 run origincar_linefollower follower
 ros2 run v4l2_camera v4l2_camera_node --ros-args -p video_device:="/dev/video8" -p image_size:=[640,480]
 ```
 
 ## 深度学习巡线
-
 ```Shell
 ros2 launch origincar_base origincar_bringup.launch.py
 ros2 launch origincar_bringup camera.launch.py enable_nv12_node:=true
@@ -20,7 +40,7 @@ ros2 run line_follower_resnet line_follower_resnet --ros-args -p model_path:=mod
 ## 识别二维码
 
 ```Shell
-订阅的是/image_raw/compressed
+订阅的是/image
 ros2 launch qr_code_detection qr_code_detection.launch.py
 ```
 
@@ -59,14 +79,15 @@ echo "source /root/dev_ws/install/local_setup.bash" >> ~/.bashrc
 ```Shell
 ros2 run v4l2_camera v4l2_camera_node --ros-args -p video_device:="/dev/video8" -p image_size:=[640,480]
 或者
-ros2 launch origincar_bringup camera.launch.py <enable_nv12_node:=true> <enable_jpeg_node:=true> 
+ros2 launch origincar_bringup camera.launch.py enable_nv12_node:=true enable_jpeg_node:=true
 ```
 
 ## 保存图像或视频
 
 ```Shell
 单独运行，自带打开摄像头，不需要提前打开
-ros2 launch origincar_bringup capimage <image_dir:='/root/dev_ws/src/origincar/origincar_capimage/images'> <image_width:=640> <image_height:=480> <topic_name:=/image_raw> <frequency:=0.5>
+ros2 run origincar_bringup capimage --ros-args -p image_dir:=/root/dev_ws/src/origincar/origincar_capimage/images -p frequency:=2.0 
+ -p image_width:=640 -p image_height:=480 -p topic_name:=/image_raw
 ros2 launch origincar_bringup capvideo <folder_name:='/root/dev_ws/src/origincar/origincar_capimage/videos'> <image_width:=640> <image_height:=480> <video_name:=xxx.mp4>
 ```
 
@@ -76,12 +97,6 @@ ros2 launch origincar_bringup capvideo <folder_name:='/root/dev_ws/src/origincar
 ros2 topic list
 ros2 topic echo <topic_name>
 ros2 topic hz /image_raw
-```
-
-## yolo障碍物检测
-
-```Shell
-ros2 launch origincar_bringup usb_websocket_display.launch.py
 ```
 
 ### 单张图片处理
