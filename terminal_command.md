@@ -88,6 +88,7 @@ colcon build --symlink-install `允许更改src中的python脚本后不再重新
 ```Shell
 source /root/dev_ws/install/local_setup.bash
 echo "source /root/dev_ws/install/local_setup.bash" >> ~/.bashrc
+source ~/.bashrc
 ```
 
 ## 开摄像头
