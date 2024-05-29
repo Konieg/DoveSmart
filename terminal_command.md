@@ -44,6 +44,22 @@ ros2 run line_follower_resnet line_follower_resnet --ros-args -p model_path:=mod
 ros2 launch qr_code_detection qr_code_detection.launch.py
 ```
 
+## 当前终端的DDS的配置
+```Shell
+export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
+export CYCLONEDDS_URI='<CycloneDDS><Domain><General><NetworkInterfaceAddress>wlan0</NetworkInterfaceAddress></General></Domain></CycloneDDS>'
+其中的wlan0是绑定的网卡名，一般有线连接改为eth0，无线网卡连接改为实际的网卡名
+ros2 doctor --report | grep middleware
+可以查看当前终端的DDS是否切换成功
+```
+
+## 设置当前终端的DOMAIN ID
+```Shell
+export ROS_DOMAIN_ID=16  # 设置为16或其他不与其他团队冲突的值，仅对当前终端生效
+可以在~/.bashrc文件中添加以下行，以便每次启动终端时自动设置
+export ROS_DOMAIN_ID=16
+```
+
 ## 零拷贝
 
 ```Shell
