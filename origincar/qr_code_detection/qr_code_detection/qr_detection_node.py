@@ -18,14 +18,13 @@
 import rclpy
 import cv2
 import cv_bridge
+import os
 from rclpy.node import Node
 from sensor_msgs.msg import CompressedImage
 from sensor_msgs.msg import Image
-from std_msgs.msg import String
 from geometry_msgs.msg import Pose
 import numpy as np
-
-import os
+from origincar_msg.msg import Sign  # 导入自定义消息
 from ament_index_python.packages import get_package_share_directory
 
 #预定义变量
@@ -39,16 +38,12 @@ class QrCodeDetection(Node):
     def __init__(self):
         super().__init__('qrcode_detect')
         self.get_logger().info("Start qrcode_detect.")
-
-        self.bridge = cv_bridge.CvBridge()
-
-        self.image_sub = self.create_subscription(
-            CompressedImage, "/image_raw/compressed", self.image_callback, 10)
-
-        self.pub_qrcode_info = self.create_publisher(
-            String, "/qrcode_detected/info_result", 10)
-        self.info_result = String()
+        # 创建发布者，话题名为 /sign_switch，消息类型为 Sign
+        self.pub_qrcode_info = self.create_publisher(Sign, '/sign_switch', 10)
+        self.image_sub = self.create_subscription(CompressedImage, "/image", self.image_callback, 10)
         
+        self.bridge = cv_bridge.CvBridge()
+        self.Signmsg = Sign()
         """
         self.pub_img = self.create_publisher(
             CompressedImage, "/qrcode_detected/img_result", 10)
@@ -58,8 +53,7 @@ class QrCodeDetection(Node):
         self.pose_result = Pose()
         """
 
-        # model路径
-        modelPath = os.path.join(get_package_share_directory('qr_code_detection'), 'model/')
+        modelPath = os.path.join(get_package_share_directory('qr_code_detection'), 'model/') # model路径
         # self.get_logger().info('path:"{}"'.format(modelPath))
 
         self.detect_obj = cv2.wechat_qrcode_WeChatQRCode(
@@ -76,9 +70,21 @@ class QrCodeDetection(Node):
             self.get_logger().info('qrPoints: "{0}"'.format(qrPoints))
 
             qrInfo_str = qrInfo[0]
-            self.info_result.data = qrInfo_str
-            self.pub_qrcode_info.publish(self.info_result)
             
+            if qrInfo_str == "ClockWise":
+                self.Signmsg.sign_data = 3
+            elif qrInfo_str == "AntiClockWise":
+                self.Signmsg.sign_data = 4
+            else:
+                return  # If QR code does not match expected values, do nothing
+            self.get_logger().info(f'Publishing: {self.Signmsg.sign_data}')
+            self.pub_qrcode_info.publish(self.Signmsg)
+            self.shutdown_node() # Shut down after publishing
+    
+    def shutdown_node(self):
+        self.get_logger().info('Shutting down node after QR code detection and publish.')
+        rclpy.shutdown()
+        
         """
             # 获取qrPoints四个点坐标
             points = qrPoints[0]
@@ -116,16 +122,9 @@ class QrCodeDetection(Node):
 
 
 def main(args=None):
-
     rclpy.init(args=args)
-
     qrCodeDetection = QrCodeDetection()
-    while rclpy.ok():
-        rclpy.spin(qrCodeDetection)
-
-    qrCodeDetection.destroy_node()
-    rclpy.shutdown()
-
+    rclpy.spin(qrCodeDetection)  # Changed to a single call of rclpy.spin
 
 if __name__ == '__main__':
     main()

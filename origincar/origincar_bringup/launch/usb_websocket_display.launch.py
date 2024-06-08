@@ -13,11 +13,12 @@ def generate_launch_description():
 
     # Declare launch arguments
     launch_args = [
-        DeclareLaunchArgument("dnn_example_config_file", default_value=TextSubstitution(text="config/fcosworkconfig.json")),
+        DeclareLaunchArgument("dnn_example_config_file", default_value=TextSubstitution(text="/root/dev_ws/src/origincar/config/dove_smart_nv12.json")),
         DeclareLaunchArgument("dnn_example_dump_render_img", default_value=TextSubstitution(text="0")),
-        DeclareLaunchArgument("dnn_example_image_width", default_value=TextSubstitution(text="480")),
-        DeclareLaunchArgument("dnn_example_image_height", default_value=TextSubstitution(text="272")),
-        DeclareLaunchArgument("dnn_example_msg_pub_topic_name", default_value=TextSubstitution(text="hobot_dnn_detection")),
+        DeclareLaunchArgument("dnn_example_image_width", default_value=TextSubstitution(text="640")),
+        DeclareLaunchArgument("dnn_example_image_height", default_value=TextSubstitution(text="480")),
+        # DeclareLaunchArgument("dnn_example_msg_pub_topic_name", default_value=TextSubstitution(text="yolov5_results")),
+        DeclareLaunchArgument("dnn_example_msg_pub_topic_name", default_value=TextSubstitution(text="playfootball_node")),
         DeclareLaunchArgument('device', default_value='/dev/video8', description='usb camera device'),
     ]
 
@@ -56,6 +57,6 @@ def generate_launch_description():
     return LaunchDescription(launch_args + [
         usb_node,
         nv12_codec_node,
-        dnn_node_example_node,
+        # dnn_node_example_node,
         web_node,
     ])

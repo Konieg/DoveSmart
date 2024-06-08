@@ -24,7 +24,8 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'qr_detection_node = qr_code_detection.qr_detection_node:main'
+            'qr_detection_node = qr_code_detection.qr_detection_node:main',
+            'qr_detection_opencv = qr_code_detection.qr_detection_opencv:main',
         ],
     },
 )

@@ -13,18 +13,18 @@ setup(
         ('share/ament_index/resource_index/packages',
             ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
-        (os.path.join('share', package_name, 'launch'), glob('launch/*.launch.py')),
     ],
     install_requires=['setuptools'],
     zip_safe=True,
-    maintainer='GuYueHome',
-    maintainer_email='support@ps-micro.com',
-    description='origincar_capimage',
+    maintainer='DoveCar',
+    maintainer_email='3060822197@qq.com',
+    description='origincar capimage',
     license='Apache 2.0',
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
             'capimage = origincar_capimage.capimage:main',
+            'capvideo = origincar_capimage.capvideo:main',
         ],
     },
 )

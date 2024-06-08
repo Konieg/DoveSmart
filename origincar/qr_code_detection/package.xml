@@ -12,7 +12,8 @@
   <depend>cv_bridge</depend>
   <depend>geometry_msgs</depend>
   <depend>image_transport_cpp</depend>
-
+  <depend>origincar_msg</depend>
+  
   <test_depend>ament_copyright</test_depend>
   <test_depend>ament_flake8</test_depend>
   <test_depend>ament_pep257</test_depend>

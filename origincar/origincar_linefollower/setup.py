@@ -25,6 +25,7 @@ setup(
     entry_points={
         'console_scripts': [
             'follower = origincar_linefollower.follower:main',
+            'follower_adaptive = origincar_linefollower.follower_adaptive:main',
         ],
     },
 )

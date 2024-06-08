@@ -1,0 +1,5 @@
+{
+	"model_file":"/root/dev_ws/src/origincar/config/hat_nv12.bin",
+	"class_num": 1,
+	"cls_names_list":"/root/dev_ws/src/origincar/config/obstacles.list"
+}
