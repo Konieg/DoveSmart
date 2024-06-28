@@ -1,7 +1,8 @@
 # DoveSmart TJU
 ## temp
 ```shell
-ros2 launch origincar_bringup camera.launch.py image_width:=1920 image_height:=1080 
+ros2 launch origincar_bringup camera.launch.py enable_nv12_node:=true image_width:=1920 image_height:=1080
+ros2 run origincar_driveimage image_compressor
 ```
 
 ## origincar_move_yolo
