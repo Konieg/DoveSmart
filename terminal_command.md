@@ -1,4 +1,9 @@
 # DoveSmart TJU
+## temp
+```shell
+ros2 launch origincar_bringup camera.launch.py image_width:=1920 image_height:=1080 
+```
+
 ## origincar_move_yolo
 ```shell
 ros2 launch origincar_base origincar_bringup.launch.py
